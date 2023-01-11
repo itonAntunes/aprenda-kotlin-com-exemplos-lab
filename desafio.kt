@@ -63,12 +63,20 @@ fun main() {
     
     formacaoKotlin.mostrarConteudos()
     formacaoKotlin.matricular(user1)
+    println("\n")
+    println("| °  Processo de matriculas  ° |")
+    println("\n")
+    println("O aluno ${user1.nome} foi matriculado no curso ${formacaoKotlin.nome} com sucesso !")
     formacaoKotlin.matricular(user2)
+    println("O aluno ${user2.nome} foi matriculado no curso ${formacaoKotlin.nome} com sucesso !")
     formacaoKotlin.matricular(user3)
+    println("O aluno ${user3.nome} foi matriculado no curso ${formacaoKotlin.nome} com sucesso !")
   
     
     println("\n")
-    println("Alunos Matriculados: ${formacaoKotlin.nome}\n")
+    println("Alunos Matriculados no Curso: ${formacaoKotlin.nome}\n")
     formacaoKotlin.mostrarUsuariosInscritos()
+    println("\n")
+    println("| ° -------------------------- ° |")
     
 }
