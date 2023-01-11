@@ -1,21 +1,74 @@
-// [Template no Kotlin Playground](https://pl.kotl.in/WcteahpyN)
-
 enum class Nivel { BASICO, INTERMEDIARIO, DIFICIL }
 
-class Usuario
+class Usuario (
+    val nome : String,
+    val id: Int,
+    var email: String
+)
 
-data class ConteudoEducacional(var nome: String, val duracao: Int = 60)
+data class ConteudoEducacional(
+    val nome: String,
+    var duracao: Int = 0
+)
 
-data class Formacao(val nome: String, var conteudos: List<ConteudoEducacional>) {
+data class Formacao(
+    val nome: String,
+    var conteudos: List<ConteudoEducacional>,
+    var nivel : Nivel
 
+){
     val inscritos = mutableListOf<Usuario>()
+
+    infix fun matricular(usuario: Usuario) {
+        inscritos.add(usuario) 
+    }
+
+    fun matricular(vararg usuarios: Usuario){
+        for(usuario in usuarios)
+            inscritos.add(usuario)
+    }
     
-    fun matricular(usuario: Usuario) {
-        TODO("Utilize o parâmetro $usuario para simular uma matrícula (usar a lista de $inscritos).")
+    // Funcaes que mostram Usuarios e Conteudos cadastrados
+    fun mostrarUsuariosInscritos(){
+        for(usuariosInscritos in inscritos){
+            println(usuariosInscritos.nome)
+        }
+    }
+    fun mostrarConteudos(){
+        for(conteudo in conteudos)
+            println(conteudo.nome)
     }
 }
 
 fun main() {
-    TODO("Analise as classes modeladas para este domínio de aplicação e pense em formas de evoluí-las.")
-    TODO("Simule alguns cenários de teste. Para isso, crie alguns objetos usando as classes em questão.")
+    // Criar novo usuario 
+    val user1 = Usuario("Everton",1,"iton.antunes@gmail.com")
+    val user2 = Usuario("Carlos",2,"carlos.exemplo@gmail.com")
+    val user3 = Usuario("Roberto",3,"roberto.exemplo@gmail.com")
+    
+    // Criar conteudo educacional
+    val kotlinExperience : List<ConteudoEducacional> = listOf(
+        ConteudoEducacional(" * Introdução ao Desenvolvimento de Software", 5),
+        ConteudoEducacional(" * Documentação oficial do Kotlin", 15),
+        ConteudoEducacional(" * Orientação a objetos e classes", 10),
+        ConteudoEducacional(" * Desafio de Codigo", 5)
+    )
+    
+    val formacaoKotlin = Formacao ("Kotlin Experience",kotlinExperience,Nivel.BASICO)
+    
+    
+    println("| °  Formação: ${formacaoKotlin.nome}  ° | \n\tNivel: ${formacaoKotlin.nivel}\n")
+    println("Grade do Curso: \n")
+    
+    
+    formacaoKotlin.mostrarConteudos()
+    formacaoKotlin.matricular(user1)
+    formacaoKotlin.matricular(user2)
+    formacaoKotlin.matricular(user3)
+  
+    
+    println("\n")
+    println("Alunos Matriculados: ${formacaoKotlin.nome}\n")
+    formacaoKotlin.mostrarUsuariosInscritos()
+    
 }
